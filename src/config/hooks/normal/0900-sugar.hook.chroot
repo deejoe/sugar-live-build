@@ -6,7 +6,7 @@ set -e
 
 # build - sugar-artwork
 cd /usr/src/sugar-artwork && (
-    ./autogen.sh
+    ./autogen.sh --prefix=/usr
     make
     make install
     echo ok
@@ -17,9 +17,9 @@ cd /usr/src/sugar-toolkit-gtk3 && (
     ./autogen.sh --with-python3
     make
     make install
-#    rsync -r /usr/local/lib/python3.7/site-packages/sugar3 /usr/lib/python3.7/dist-packages/
+#    rsync -r /usr/lib/python3.7/site-packages/sugar3 /usr/lib/python3.7/dist-packages/
     git clean -dfx
-    ./autogen.sh --with-python2
+    ./autogen.sh --prefix /usr --with-python2
     make
     make install
     echo ok
@@ -30,7 +30,7 @@ cd /usr/src/sugar-datastore && (
     ./autogen.sh
     make
     make install
-#    rsync -r /usr/local/lib/python3.7/site-packages/carquinyol /usr/lib/python3.7/dist-packages/
+#    rsync -r /usr/lib/python3.7/site-packages/carquinyol /usr/lib/python3.7/dist-packages/
     echo ok
 ) > /usr/src/install-sugar-datastore.log 2>&1
 
@@ -39,7 +39,7 @@ cd /usr/src/sugar && (
     ./autogen.sh
     make
     make install
-#    mv /usr/local/lib/python3.7/site-packages/jarabe /usr/lib/python3.7/dist-packages/
+#    mv /usr/lib/python3.7/site-packages/jarabe /usr/lib/python3.7/dist-packages/
     echo ok
 ) > /usr/src/install-sugar.log 2>&1
 
@@ -47,8 +47,8 @@ cd /usr/src/sugar && (
 cd /usr/src/gwebsockets && (
     git clean -dfx
     python3 setup.py build
-    python3 setup.py install #--prefix /usr
-    #cp -pr gwebsockets /usr/lib/python3.7/dist-packages/
+    python3 setup.py install
+#    cp -pr gwebsockets /usr/lib/python3.7/dist-packages/
     echo ok
 ) > /usr/src/install-gwebsockets.log 2>&1
 
